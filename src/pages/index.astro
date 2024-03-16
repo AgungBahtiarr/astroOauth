@@ -1,0 +1,30 @@
+---
+import { db, user } from "astro:db";
+
+const users = Astro.locals.user;
+if (!users) {
+	return Astro.redirect("/login");
+}
+
+const username = users.username;
+
+const data = await db.select().from(user);
+
+// console.log(data);
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Astro</title>
+	</head>
+	<body>
+		<h1>WellCome</h1>
+		<form method="post" action="/api/logout">
+			<button>Sign out</button>
+		</form>
+	</body>
+</html>
